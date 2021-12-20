@@ -26,7 +26,7 @@ const port = config.get('port');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-var vtRouter = require('./routes/VT');
+var vtRouter = require('./routes/VT'); //if you want to use a path without passwork, use route/VT-open
 
 // logger configuration (no semicolon)
 const logger = winston.createLogger({

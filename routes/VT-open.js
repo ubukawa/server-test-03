@@ -58,18 +58,13 @@ const getTile = async (mbtiles, z, x, y) => {
 //GET Tile(router)- t,z,x,y are extracted from the path
 router.get(`/:t/:z/:x/:y.pbf`, 
  async function(req, res) {
+  busy = true
   const t = req.params.t
   const z = parseInt(req.params.z)
   const x = parseInt(req.params.x)
   const y = parseInt(req.params.y)
-  if (!req.session.userId) {
-    // Redirect unauthenticated requests to home page
-    //res.redirect('/')
-    res.status(401).send(`Please log in to get: /zxy/${t}/${z}/${x}/${y}.pbf`)
-    busy = false
-  } else {
-  busy = true
-    getMBTiles(t, z, x, y).then(mbtiles => {
+
+  getMBTiles(t, z, x, y).then(mbtiles => {
     getTile(mbtiles, z, x, y).then(r => {
       if (r.tile) {
         res.set('content-type', 'application/vnd.mapbox-vector-tile')
@@ -89,7 +84,6 @@ router.get(`/:t/:z/:x/:y.pbf`,
   }).catch(e => {
     res.status(404).send(`mbtiles not found for /${t}/${z}/${x}/${y}.pbf`)
   })
-  } 
  }
 );
 
