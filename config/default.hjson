@@ -6,5 +6,9 @@
  logDirPath: log
  port: 3000
  mbtilesDir: mbtiles
+ tilemapDir: tmap
+ maxTiles:{
+     ne-test: 2
+ }
 }
 
